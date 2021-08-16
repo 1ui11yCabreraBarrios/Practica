@@ -1,0 +1,13 @@
+$color-sass: #bf4080; // esta es una variable y & esto es un hover
+$col-sass:#64113b;
+
+.bg-sass{
+    background-color: $color-sass;
+    transition: background-color 0.5s ease-in-out;
+
+    &:hover{
+        background-color: $col-sass;
+    }
+
+
+}
