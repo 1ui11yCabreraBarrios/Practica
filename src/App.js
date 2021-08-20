@@ -21,6 +21,8 @@ function App() {
   return (
     <div className="App">
      <h1>hello world</h1>
+     <CrudAPI/>
+     <CrudApp/>
      <nav>
        <button onClick={sumar}>+</button>
        <button onClick={restar}>-</button>
@@ -50,8 +52,8 @@ function App() {
 
       
 </div>
-<CrudApp/>
-<CrudAPI/>
+
+
 
     </div>
 

@@ -15,7 +15,7 @@ const initialForm={
 };
 
 
-const Formulario = ({createData,updateData,dataToEdit,setDataToEdit}) => {
+const Formulario2 = ({createData,updateData,dataToEdit,setDataToEdit}) => {
     const[form,setForm]=React.useState(initialForm)
 
 React.useEffect(()=>{
@@ -104,4 +104,4 @@ React.useEffect(()=>{
     )
 }
 
-export default Formulario
+export default Formulario2
