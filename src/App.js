@@ -9,6 +9,7 @@ import Styled from "./compomentesEstilizados/Styled";
 import Boostrap from "./Boostrap/BoostrapReact";
 import CrudApp from "./components2/CrudApp";
 import CrudAPI from "./components3/CrudAPI";
+import { Rutas } from "./conpoments4/Rutas";
 
 
 
@@ -20,6 +21,20 @@ function App() {
   const restar = ()=> setValor(valor -1)
   return (
     <div className="App">
+
+<div>
+      <h1>React Router</h1>
+      <a
+        href="https://reactrouter.com/web/guides/quick-start"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Documentación
+      </a>
+      <hr />
+     
+      <Rutas />
+    </div>
      <h1>hello world</h1>
      <CrudAPI/>
      <CrudApp/>

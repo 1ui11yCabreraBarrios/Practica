@@ -69,3 +69,29 @@ td{
     gap:2rem;
   }
 }
+a {
+  margin-right: 1rem;
+}
+li {
+  margin-bottom: 1rem;
+}
+label {
+  padding: 0.5rem 0;
+  margin: 0 0 0.5rem 0;
+  display: inline-block;
+  color: #444;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+hr {
+  margin: 2rem auto;
+}
+.active {
+  font-weight: bold;
+  color: #61dafb;
+}
