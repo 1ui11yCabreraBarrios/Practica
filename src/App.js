@@ -10,6 +10,7 @@ import Boostrap from "./Boostrap/BoostrapReact";
 import CrudApp from "./components2/CrudApp";
 import CrudAPI from "./components3/CrudAPI";
 import { Rutas } from "./conpoments4/Rutas";
+import SongSearch from "./compoments5/SongSearch";
 
 
 
@@ -23,6 +24,7 @@ function App() {
     <div className="App">
 
 <div>
+  <SongSearch/>
       <h1>React Router</h1>
       <a
         href="https://reactrouter.com/web/guides/quick-start"
@@ -33,11 +35,11 @@ function App() {
       </a>
       <hr />
      
-      <Rutas />
+     {/*  <Rutas /> */}
     </div>
      <h1>hello world</h1>
-     <CrudAPI/>
-     <CrudApp/>
+     {/* <CrudAPI/>
+     <CrudApp/> */}
      <nav>
        <button onClick={sumar}>+</button>
        <button onClick={restar}>-</button>
@@ -49,7 +51,7 @@ function App() {
      <br/>
  
      
-     <Scroll/>
+  {/*    <Scroll/>
     <AjaxHooks/>
     <hr/>
     <Hooks/>
@@ -58,13 +60,13 @@ function App() {
     <hr/>
     <Formularios/>
     <br/>
-    <Estilos/>
+    <Estilos/> */}
     <br/>
-    <Styled/>
+  {/*   <Styled/> */}
     <div>
       <h1> Frameworks CSS con react</h1>
-      <Boostrap/>
-
+     {/*  <Boostrap/>
+ */}
       
 </div>
 
