@@ -11,6 +11,7 @@ import CrudApp from "./components2/CrudApp";
 import CrudAPI from "./components3/CrudAPI";
 import { Rutas } from "./conpoments4/Rutas";
 import SongSearch from "./compoments5/SongSearch";
+import { SelectAnidados } from "./components6/SelectAnidados";
 
 
 
@@ -24,6 +25,9 @@ function App() {
     <div className="App">
 
 <div>
+
+
+  <SelectAnidados/>
   <SongSearch/>
       <h1>React Router</h1>
       <a
