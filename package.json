@@ -24,7 +24,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fake-api": "json-server --watch src/components3/Data/db.json --port 5000 "
+    "fake-api": "json-server --watch src/components3/Data/db.json --port 5000 ",
+    "fake-api1": "json-server --watch src/components6/Data/estado.json --port 5001 ",
+    "fake-api2": "json-server --watch src/components6/Data/colonia.json --port 5002 ",
+    "fake-api3": "json-server --watch src/components6/Data/municipios.json --port 5003 "
   },
   "eslintConfig": {
     "extends": [

@@ -12,6 +12,8 @@ import CrudAPI from "./components3/CrudAPI";
 import { Rutas } from "./conpoments4/Rutas";
 import SongSearch from "./compoments5/SongSearch";
 import { SelectAnidados } from "./components6/SelectAnidados";
+import ConctactForm from "./validaciones/ConctactForm";
+import Modals from "./Modales/Modals";
 
 
 
@@ -25,7 +27,10 @@ function App() {
     <div className="App">
 
 <div>
-
+  <hr/>
+  <Modals/>
+  <hr/>
+<ConctactForm/>
 
   <SelectAnidados/>
   <SongSearch/>
@@ -39,11 +44,11 @@ function App() {
       </a>
       <hr />
      
-     {/*  <Rutas /> */}
+       <Rutas /> 
     </div>
      <h1>hello world</h1>
-     {/* <CrudAPI/>
-     <CrudApp/> */}
+      <CrudAPI/>
+     <CrudApp/> 
      <nav>
        <button onClick={sumar}>+</button>
        <button onClick={restar}>-</button>
@@ -55,7 +60,7 @@ function App() {
      <br/>
  
      
-  {/*    <Scroll/>
+     <Scroll/>
     <AjaxHooks/>
     <hr/>
     <Hooks/>
@@ -64,13 +69,13 @@ function App() {
     <hr/>
     <Formularios/>
     <br/>
-    <Estilos/> */}
+    <Estilos/> 
     <br/>
-  {/*   <Styled/> */}
+    <Styled/> 
     <div>
       <h1> Frameworks CSS con react</h1>
-     {/*  <Boostrap/>
- */}
+       <Boostrap/>
+ 
       
 </div>
 
