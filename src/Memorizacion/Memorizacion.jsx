@@ -1,9 +1,9 @@
 import Contador from "./Compoments/Contador"
+import moduleStyle from"../Estilos/Estilos.module.css"
 const Memorizacion = () => {
     return (
         <div>
-        <h1>Memorización en React</h1>
-        <hr />
+        <h3  className={moduleStyle.success}>Memorización en React</h3>
         <h2>Teoria</h2>
         <h3>
           <a
