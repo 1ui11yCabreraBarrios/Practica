@@ -14,18 +14,20 @@ import SongSearch from "./compoments5/SongSearch";
 import { SelectAnidados } from "./components6/SelectAnidados";
 import ConctactForm from "./validaciones/ConctactForm";
 import Modals from "./Modales/Modals";
+import Memorizacion from "./Memorizacion/Memorizacion";
 
 
 
 function App() {
 
-  const [ valor, setValor ] = useState(0)
+/*   const [ valor, setValor ] = useState(0)
 
   const sumar = ()=> setValor(valor +1);
-  const restar = ()=> setValor(valor -1)
-  return (
+  const restar = ()=> setValor(valor -1)*/
+  return ( 
     <div className="App">
-<h1>Agregando Rutas</h1>
+      <Memorizacion/>
+{/* <h1>Agregando Rutas</h1>
 <SongSearch/>
       <hr/>
       <hr/>
@@ -85,7 +87,7 @@ function App() {
  
       
 </div>
-
+ */}
 
 
     </div>
