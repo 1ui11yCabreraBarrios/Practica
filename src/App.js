@@ -25,6 +25,14 @@ function App() {
   const restar = ()=> setValor(valor -1)
   return (
     <div className="App">
+<h1>Agregando Rutas</h1>
+<SongSearch/>
+      <hr/>
+      <hr/>
+      <br/>
+ <h1>Agregando Rutas</h1>
+      <CrudAPI/>
+      <hr/>
 
 <div>
   <hr/>
@@ -46,8 +54,7 @@ function App() {
      
        <Rutas /> 
     </div>
-     <h1>hello world</h1>
-      <CrudAPI/>
+    
      <CrudApp/> 
      <nav>
        <button onClick={sumar}>+</button>

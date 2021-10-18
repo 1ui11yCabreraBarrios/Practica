@@ -1,68 +1,117 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import React, { useState, useEffect } from "react";
+import { HashRouter, Link, Route, Switch } from "react-router-dom";
+import { services } from "../helpers/Services";
+import Error404 from "./../pages/Error404";
+import SongPage from "./SongPage";
+import Loader from "./Loader";
 import SongDetails from "./SongDetails";
 import SongForm from "./SongForm";
-import Loader from "./Loader";
-import { services } from "../helpers/Services";
+import SongTable from "./SongTable";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
+let mySongsInit = JSON.parse(localStorage.getItem("mySongs")) || [];
 
 const SongSearch = () => {
-  const classes = useStyles();
+  const [search, setSearch] = useState(null);
+  const [lyric, setLyric] = useState(null);
+  const [bio, setBio] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [mySongs, setMySongs] = useState(mySongsInit);
 
-  const [search, setSearch] = React.useState(null);
-  const [lyric, setLyric] = React.useState(null);
-  const [bio, setBio] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (search === null) return;
-    const fetchData = async () => {
-    const {artista, cancion} = search;
 
-      let artistaUrl = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artista}`;
-      let cancionUrl = `https://api.lyrics.ovh/v1/${artista}/${cancion}`;
-      console.log(cancionUrl);
+    const fetchData = async () => {
+      const { artist, song } = search;
+
+      let artistUrl = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artist}`;
+      let songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+
+      //console.log(artistUrl, songUrl);
+
       setLoading(true);
-      const [artistaRes, cancionRes] = await Promise.all([
-        services().get(artistaUrl),
-        services().get(cancionUrl),
+
+      const [artistRes, songRes] = await Promise.all([
+        services().get(artistUrl),
+        services().get(songUrl),
       ]);
-      console.log(cancionRes);
-      setBio(artistaRes);
-      setLyric(cancionRes);
+
+      //console.log(artistRes, songRes);
+
+      setBio(artistRes);
+      setLyric(songRes);
       setLoading(false);
     };
 
     fetchData();
-  },[search]);
+
+    localStorage.setItem("mySongs", JSON.stringify(mySongs));
+  }, [search, mySongs]);
 
   const handleSearch = (data) => {
+    //console.log(data);
     setSearch(data);
   };
+
+  const handleSaveSong = () => {
+    alert("Salvando canción en Favoritos");
+    let currentSong = {
+      search,
+      lyric,
+      bio,
+    };
+
+    const songs = [...mySongs, currentSong];
+    console.log(songs)
+    setMySongs(songs);
+    setSearch(null);
+    localStorage.setItem("mySongs", JSON.stringify(songs));
+  };
+
+  const handleDeleteSong = (id) => {
+    //alert(`Eliminando canción con el id: ${id}`);
+    let isDelete = window.confirm(
+      `¿Estás seguro de eliminar la canción con el id "${id}"`
+    );
+
+    if (isDelete) {
+      let songs = mySongs.filter((el, index) => index !== id);
+      setMySongs(songs);
+      localStorage.setItem("mySongs", JSON.stringify(songs));
+    }
+  };
+
   return (
-    <div className={classes.root}>
-      <h1>Busqueda de la Canción</h1>
-
-     
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <SongForm handleSearch={handleSearch} />
-        </Grid>
-
-        <Grid item xs={12}>
+    <div>
+      <HashRouter basename="canciones">
+        <header>
+          <h2>Song Search</h2>
+          <Link to="/">Home</Link>
+        </header>
         {loading && <Loader />}
-        {search && !loading && (
-         
-          <SongDetails lyric={lyric} bio={bio} search={search} />
-          )}
-        </Grid>
-      </Grid>
+        <article className="grid-1-2">
+          <Switch>
+            <Route exact path="/">
+              <SongForm
+                handleSearch={handleSearch}
+                handleSaveSong={handleSaveSong}
+              />
+              <SongTable
+                mySongs={mySongs}
+                handleDeleteSong={handleDeleteSong}
+              />
+              {search && !loading && (
+                <SongDetails search={search} lyric={lyric} bio={bio} />
+              )}
+            </Route>
+            <Route
+              exact
+              path="/:id"
+              children={<SongPage mySongs={mySongs} />}
+            />
+            <Route path="*" children={<Error404 />} />
+          </Switch>
+        </article>
+      </HashRouter>
     </div>
   );
 };

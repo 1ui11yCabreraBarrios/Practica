@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
 const initialForm={
     marca:"",
@@ -16,7 +17,8 @@ const initialForm={
 
 
 const Formulario2 = ({createData,updateData,dataToEdit,setDataToEdit}) => {
-    const[form,setForm]=React.useState(initialForm)
+    const[form,setForm]=React.useState(initialForm);
+    let history= useHistory();
 
 React.useEffect(()=>{
     if(dataToEdit){
@@ -37,6 +39,7 @@ React.useEffect(()=>{
     const handleReset=(e)=>{
         setForm(initialForm);
         setDataToEdit(null);
+        history.push("/")
 
     }
    

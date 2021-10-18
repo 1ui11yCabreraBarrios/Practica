@@ -5,6 +5,10 @@ import { Table2 } from './Table2';
 import "../index.css";
 import { Loader } from './Loader';
 import { Message } from './Message';
+import { HashRouter, Route, NavLink, Switch } from 'react-router-dom';
+import Error404 from '../pages/Error404';
+
+
 
 const CrudAPI = () => {
 
@@ -18,18 +22,18 @@ const CrudAPI = () => {
     useEffect(() => {
         setLoading(true)
         services()
-        .get(url).then((res) => {
-            console.log(res);
-            if (!res.err) {
-                setDb(res)
-                setError(null)
-            } else {
-                setDb(null)
-                setError(res)
-            }
-            setLoading(false)
-        });
-    },[url]);
+            .get(url).then((res) => {
+                console.log(res);
+                if (!res.err) {
+                    setDb(res)
+                    setError(null)
+                } else {
+                    setDb(null)
+                    setError(res)
+                }
+                setLoading(false)
+            });
+    }, [url]);
     const createData = (data) => {
         data.id = Date.now();
 
@@ -51,13 +55,13 @@ const CrudAPI = () => {
     }
     const updateData = (data) => {
         let endpoint = `${url}/${data.id}`;
-       
+
         let options = {
             body: data,
-            headers: { "content-type":"application/json" }
+            headers: { "content-type": "application/json" }
         };
         api.put(endpoint, options).then((res) => {
-            
+
 
             if (!res.err) {
                 let newData = db.map((value) => (value.id === data.id ? data : value))
@@ -104,21 +108,44 @@ const CrudAPI = () => {
     }
     return (
         <div>
-            <h2>Hello Word</h2>
-            <article className="grid-1-2">
-                <Formulario2
-                    createData={createData}
-                    updateData={updateData}
-                    dataToEdit={dataToEdit}
-                    setDataToEdit={setDataToEdit} />
-                {loading && <Loader />}
-                {error && <Message msg={`Error ${error.status}:${error.statusText}`} bgColor="#dc3545" />}
-                {db && (<Table2 data={db}
-                    setDataToEdit={setDataToEdit}
-                    deleteData={deleteData} />)
-                }
 
-            </article>
+
+            <HashRouter basename="autos">
+                <header>
+                    <h2>Rutas</h2>
+                    <nav>
+                        <NavLink to="/" activeClassName="active">Autos</NavLink>
+                        <NavLink to="/agregar" activeClassName="active">Agregar</NavLink>
+                    </nav>
+
+                </header>
+                <Switch>
+                    <Route exact path="/"><h2> Home de Autos</h2>
+                        {loading && <Loader />}
+                        {error && <Message msg={`Error ${error.status}:${error.statusText}`} bgColor="#dc3545" />}
+                        {db && (<Table2 data={db}
+                            setDataToEdit={setDataToEdit}
+                            deleteData={deleteData} />)
+                        }
+                    </Route>
+                    <Route exact path="/agregar"><Formulario2
+                        createData={createData}
+                        updateData={updateData}
+                        dataToEdit={dataToEdit}
+                        setDataToEdit={setDataToEdit} />
+                    </Route>
+                    <Route exact path="/editar/:id"><Formulario2
+                        createData={createData}
+                        updateData={updateData}
+                        dataToEdit={dataToEdit}
+                        setDataToEdit={setDataToEdit} />
+                    </Route>
+                    <Route path="*" children={<Error404 />} />
+                </Switch>
+
+
+            </HashRouter>
+           
         </div>
     )
 

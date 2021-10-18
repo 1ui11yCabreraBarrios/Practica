@@ -1,22 +1,13 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-}));
+const initialForm = {
+  artist: "",
+  song: "",
+};
 
-const SongForm = ({ handleSearch }) => {
-  const classes = useStyles();
-  const [form, setForm] = React.useState({
-    artista: "",
-    cancion: "",
-  });
+const SongForm = ({ handleSearch, handleSaveSong }) => {
+  const [form, setForm] = useState(initialForm);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleChange = (e) => {
     setForm({
@@ -24,40 +15,47 @@ const SongForm = ({ handleSearch }) => {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.artista || !form.cancion) {
+
+    if (!form.artist || !form.song) {
       alert("Datos Incompletos");
+      setIsDisabled(true);
       return;
     }
-    handleSearch(form);
 
-    setForm({ artista: "", cancion: "" });
+    handleSearch(form);
+    setForm(initialForm);
+    setIsDisabled(false);
   };
+
   return (
-    <form className={classes.root} onSubmit={handleSubmit}>
-      <TextField
-      type="text"
-        id="artista"
-        name="artista"
-        label="Ingrese artista"
-        onChange={handleChange}
-        value={form.artista}
-        placeholder="Ingrese artista"
-        multiline
-      />
-      <TextField
-       type="text"
-        id="cancion"
-        name="cancion"
-        label="Ingresa cancion"
-        onChange={handleChange}
-        value={form.cancion}
-        placeholder="Ingrese cancion"
-        multiline
-      />
-      <button type="submit">Enviar</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="artist"
+          placeholder="Nombre del Intérprete"
+          onChange={handleChange}
+          value={form.artist}
+        />
+        <input
+          type="text"
+          name="song"
+          placeholder="Nombre de la Canción"
+          onChange={handleChange}
+          value={form.song}
+        />
+        <input type="submit" value="Enviar" />
+        <input
+          type="button"
+          onClick={handleSaveSong}
+          value="Agregar Canción"
+          disabled={isDisabled && "disabled"}
+        />
+      </form>
+    </div>
   );
 };
 

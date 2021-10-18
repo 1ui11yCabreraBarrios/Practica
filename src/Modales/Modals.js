@@ -5,7 +5,7 @@ import ModalPortal from "./ModalPortal";
 import SongSearch from "../compoments5/SongSearch";
 
 const Modals = () => {
-  const [isOpenModal1, openModal1, closeModal1] = useModal(true);
+  const [isOpenModal1, openModal1, closeModal1] = useModal(false);
   const [isOpenModal2, openModal2, closeModal2] = useModal(false);
   const [isOpenContact, openModalContact, closeModalContact] = useModal(false);
   const [isOpenSong, openModalSong, closeModalSong] = useModal(false);
